@@ -11,7 +11,6 @@ app.get("/", function (req, res) {
 app.get("/notes", function (req, res) {
     res.send("This is the Notes Page");
  });
- 
 
 app.listen(port, () => {
    console.log(`Server is running on port ${port}`);
