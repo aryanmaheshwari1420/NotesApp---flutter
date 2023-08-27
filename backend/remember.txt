@@ -3,3 +3,9 @@
 3. To use express in server.js we use require();
 4. mongoose.connect(); // iske andr deni hoti hai connection string vo ye hoti hai ki online mongodb platform se get ki jaati hai application banake 
 
+5. nodemon is used to reflect the live changes just like in html css js liveserver
+6. // Steps to create model:
+// 1. Define Schema --> Note :id,userid,title,content,dateAdded
+// 2. Create Model --> <model name> <Schema> Note
+
+7. 
