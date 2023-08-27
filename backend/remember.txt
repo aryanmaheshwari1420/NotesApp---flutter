@@ -1,5 +1,5 @@
 1. express is package so to use it we use npm.
 2. To create server we need to use express
 3. To use express in server.js we use require();
- 
+4. mongoose.connect(); // iske andr deni hoti hai connection string vo ye hoti hai ki online mongodb platform se get ki jaati hai application banake 
 
