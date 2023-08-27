@@ -1,0 +1,5 @@
+1. express is package so to use it we use npm.
+2. To create server we need to use express
+3. To use express in server.js we use require();
+ 
+
