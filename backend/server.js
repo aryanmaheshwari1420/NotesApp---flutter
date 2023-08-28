@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 
@@ -12,7 +13,7 @@ const mongoose = require("mongoose");
 const Note = require("./src/models/Note");
 const MongoUrl =
   "mongodb+srv://aryanmaheshwari1420:rr1234@cluster0.ehf7z7f.mongodb.net/notesdb";
-mongoose.connect(MongoUrl).then(function () {
+mongoose.connect(process.env.MONGO_URI).then(function () {
   //Home Route ex - "/"
   app.get("/", function (req, res) {
     const response = { message: "API Works!" };
