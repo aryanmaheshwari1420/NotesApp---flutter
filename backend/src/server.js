@@ -11,10 +11,9 @@ app.use(bodyParser.json());
 const mongoose = require("mongoose");
 // until mongoose not connect server will not start
 const Note = require("./models/Note");
+const MongoUrl = "mongodb+srv://aryanmaheshwari1420:rr1234@cluster0.ehf7z7f.mongodb.net/notesdb";
 mongoose
-  .connect(
-    "mongodb+srv://aryanmaheshwari1420:rr1234@cluster0.ehf7z7f.mongodb.net/notesdb"
-  )
+  .connect(MongoUrl)
   .then(function () {
     //Home Route ex - "/"
     app.get("/", function (req, res) {
@@ -25,8 +24,8 @@ mongoose
    app.use("/notes",noteRouter); 
   });
 
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
