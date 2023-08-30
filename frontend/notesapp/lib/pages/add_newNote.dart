@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class NewNote extends StatefulWidget {
-  const NewNote({super.key});
+  final bool isUpdate;
+  final Note? note;
+  const NewNote({super.key, required this.isUpdate, this.note});
 
   @override
   State<NewNote> createState() => _NewNoteState();
@@ -30,6 +32,22 @@ class _NewNoteState extends State<NewNote> {
     Navigator.pop(context);
   }
 
+  void updateNote() {
+    widget.note!.title = titleController.text;
+    widget.note!.content = contentController.text;
+    Provider.of<NotesProvider>(context, listen: false).updateNote(widget.note!);
+    Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isUpdate) {
+      titleController.text = widget.note!.title!;
+      contentController.text = widget.note!.content!;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +55,12 @@ class _NewNoteState extends State<NewNote> {
         actions: [
           IconButton(
               onPressed: () {
-                addNewNote();
+                if (widget.isUpdate) {
+                  //update
+                  updateNote();
+                } else {
+                  addNewNote();
+                }
               },
               icon: const Icon(Icons.check))
         ],
@@ -49,7 +72,7 @@ class _NewNoteState extends State<NewNote> {
             children: [
               TextField(
                 controller: titleController,
-                autofocus: true,
+                autofocus: (widget.isUpdate == true) ? false : true,
                 onSubmitted: (val) {
                   if (val != "") {
                     noteFocus.requestFocus();

@@ -20,53 +20,65 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title:  const Text("NotesApp"),
+        title: const Text("NotesApp"),
         centerTitle: true,
       ),
       body: SafeArea(
-        child: GridView.builder(
+        child:(notesProvider.notes.length>0)? GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2), // ek line me 2 widgets aa skte hai
           itemCount: notesProvider.notes.length,
           itemBuilder: (context, index) {
             Note currentNote = notesProvider.notes[index];
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 2,
-                )
-              ),
-              margin: const EdgeInsets.all(5),
-              padding: const EdgeInsets.all(10),
-              color: Colors.blue,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    currentNote.title!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style:const  TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    
-                  ),),
-                 const SizedBox(height: 5),
-                  Text(currentNote.content!,
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15
-                  ),),
-                ],
+            return GestureDetector(
+              onTap: () {
+                // for update
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewNote(isUpdate: true,note: currentNote),
+                    ));
+              },
+              onLongPress: () {
+                // for delete
+                notesProvider.deleteNote(currentNote);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 2,
+                    )),
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
+                color: Colors.blue,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      currentNote.title!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.amber,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      currentNote.content!,
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.grey, fontSize: 15),
+                    ),
+                  ],
+                ),
               ),
             );
           },
-        ),
+        ):const Center(child: Text("Add a New Note")),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -74,7 +86,7 @@ class _HomePageState extends State<HomePage> {
               context,
               MaterialPageRoute(
                 fullscreenDialog: true,
-                builder: (context) => const NewNote(),
+                builder: (context) => const NewNote(isUpdate: false,),
               ));
         },
         child: const Icon(Icons.add),
