@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("NotesApp"),
         centerTitle: true,
       ),
-      body: SafeArea(
+      body: (notesProvider.isLoading==false)?SafeArea(
         child:(notesProvider.notes.length>0)? GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2), // ek line me 2 widgets aa skte hai
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ):const Center(child: Text("Add a New Note")),
-      ),
+      ):Center(child: CircularProgressIndicator(),),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
