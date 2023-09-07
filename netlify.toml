@@ -1,6 +1,6 @@
 # example netlify.toml
 [build]
-  command = "npm i express mongoose dotenv "
+  build = "npm run build"
   functions = "netlify/functions"
   publish = ""
 
