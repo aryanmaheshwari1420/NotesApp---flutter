@@ -8,4 +8,5 @@
 // 1. Define Schema --> Note :id,userid,title,content,dateAdded
 // 2. Create Model --> <model name> <Schema> Note
 
-7. 
+7. mongoose ka use karke mongodb se connection banate hai 
+8. postman ke jariye hum dummy data test krskte hai apni api ke liye bina frontend ke
