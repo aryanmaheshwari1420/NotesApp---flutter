@@ -25,7 +25,7 @@ router.post("/list", async function (req, res) {
     const response = { message: "New Note created! " + `id:${req.body.id}` };
     res.json(response);
   });
-
+  
   router.post("/delete",async function(req,res){
     await Note.deleteOne({id:req.body.id});
 

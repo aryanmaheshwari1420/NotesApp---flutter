@@ -10,3 +10,4 @@
 
 7. mongoose ka use karke mongodb se connection banate hai 
 8. postman ke jariye hum dummy data test krskte hai apni api ke liye bina frontend ke
+9. bodyParser is used to parse the body of request   

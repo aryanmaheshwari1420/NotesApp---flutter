@@ -5,7 +5,7 @@ const noteSchema = mongoose.Schema({
         type: String,
         unique:true,
         required:true
-    },
+    }, 
     userid:{
         type:String,
         required : true,
