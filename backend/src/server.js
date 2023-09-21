@@ -11,9 +11,10 @@ app.use(bodyParser.json());
 const mongoose = require("mongoose");
 // until mongoose not connect server will not start
 const Note = require("./models/Note");
+// console.log(process.env.MONGO_URI);
 // const MongoUrl =
 //   "mongodb+srv://aryanmaheshwari1420:rr1234@cluster0.ehf7z7f.mongodb.net/notesdb";
-mongoose.connect(process.env.MONGO_URI).then(function () {
+mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true}).then(function () {
   //Home Route ex - "/"
   app.get("/", function (req, res) {
     const response = { message: "API Works!" };
