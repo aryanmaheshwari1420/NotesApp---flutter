@@ -1,31 +1,27 @@
-require('dotenv').config();
-const express = require("express");
+// Initialization
+const express = require('express');
 const app = express();
 
-const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+const Note = require('./models/Note');
+
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// true --> Nested Objects (correct)
-// false --> Nested Objecs (not correct)
-const mongoose = require("mongoose");
-// until mongoose not connect server will not start
-const Note = require("./models/Note");
-// console.log(process.env.MONGO_URI);
-// const MongoUrl =
-//   "mongodb+srv://aryanmaheshwari1420:rr1234@cluster0.ehf7z7f.mongodb.net/notesdb";
-mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true}).then(function () {
-  //Home Route ex - "/"
-  app.get("/", function (req, res) {
-    const response = { message: "API Works!" };
-    res.json(response);
-  });
-  const noteRouter = require("./routes/Notes");
-  app.use("/notes", noteRouter);
+const mongoDbPath = "mongodb+srv://aryanmaheshwari1420:rr1234@cluster0.ehf7z7f.mongodb.net/notesdb";
+mongoose.connect(mongoDbPath).then(function() {
+    app.get("/", function(req, res) {
+        const response = { statuscode: res.statusCode, message: "API Works!" };
+        res.json(response);
+    });
+    
+    const noteRouter = require('./routes/Note');
+    app.use("/notes", noteRouter);
 });
 
+// Starting the server on a PORT
 const PORT = process.env.PORT || 5000;
-  
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, function() {
+    console.log("Server started at PORT: " + PORT);
 });
